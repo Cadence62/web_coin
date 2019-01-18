@@ -2,21 +2,33 @@ package api_v1
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 	"net/http"
+
+	_ "web_coin/config"
+	"web_coin/model"
+	"web_coin/utils"
 )
 
-func AllCoin(c *gin.Context) {
-	All_Coin := []string{"BTC", "BCH", "XRP", "ETH"}
-	c.JSON(
-		http.StatusOK,
-		gin.H{
-			"data": All_Coin,
-		})
+func SupportCoin(c *gin.Context) {
+	result := utils.NewResult()
+	defer c.JSON(http.StatusOK, result)
+	supportcoin := viper.Get("supportcoin")
+	result.Data = supportcoin
+
 }
 
-func Routes(route *gin.Engine) {
-	urls_api_v1 := route.Group("/v1")
-	{
-		urls_api_v1.GET("/allcoin", AllCoin)
+func NewCoinAddress(c *gin.Context) {
+	result := utils.NewResult()
+	defer c.JSON(http.StatusOK, result)
+	var arg model.NewCoinAddress
+	if err := c.ShouldBindJSON(&arg); err != nil {
+		result.Code = ArgError
+		result.Msg = ErrotMsg(ArgError)
+		return
+	} else {
+		result.Data = arg.CoinName
+		result.Code = OK
+		result.Msg = ErrotMsg(OK)
 	}
 }

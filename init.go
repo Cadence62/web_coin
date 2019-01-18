@@ -14,8 +14,8 @@ func main() {
 	defer db.Close()
 
 	// Migrate the schema
-	db.AutoMigrate(&model.User{})
+	//db.AutoMigrate(&model.User{})
 	// 为模型`User`创建表
-	//db.CreateTable(&User{})
+	db.CreateTable(&model.User{})
 
 }
