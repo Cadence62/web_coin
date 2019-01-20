@@ -1,17 +1,20 @@
 package main
 
 import (
-	"strings"
+	"fmt"
+	"math/rand"
+	"time"
 )
 
 func main() {
-	arg := []string{"BTC", "BCH", "XRP"}
-	for _, x := range arg {
-		if a := strings.Compare("XRP", x); a == 0 { //判断2个字符串是否相等
-			print("YES")
-			break
-		}
-
-	}
-
+	//time := int32(time.Now().Unix())
+	//time := int(time.Now().Unix())
+	//print(time,"\n")
+	//randint := rand.Intn(100)
+	//print(randint,"\n")
+	//tag := strconv.Itoa(time + randint)
+	//print(tag,"\n")
+	//tag = string([]rune(tag)[1:9])
+	rand.Seed(time.Now().Unix())
+	fmt.Print(rand.Intn(100))
 }

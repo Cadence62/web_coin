@@ -12,5 +12,5 @@ func main() {
 	router := gin.Default()
 	api_v1.Routes(router)
 
-	_ = router.Run(viper.GetString("system.port"))
+	router.Run(viper.GetString("system.port"))
 }
